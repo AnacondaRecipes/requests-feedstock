@@ -37,6 +37,10 @@ about:
   license: Apache-2.0
   license_file: LICENSE
   summary: Requests is an elegant and simple HTTP library for Python, built with ♥.
+  description: |
+    Requests is the only Non-GMO HTTP library for Python, safe for human
+    consumption.
+  doc_url: http://docs.python-requests.org/
   dev_url: https://github.com/psf/requests
 
 extra:
