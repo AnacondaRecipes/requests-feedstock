@@ -22,8 +22,9 @@ requirements:
   run:
     - python >=3.6
     - certifi >=2017.4.17
-    - chardet >=3.0.2,<5
-    - charset-normalizer >=2.0.0,<2.0.1
+    # no longer required, but optional: https://github.com/psf/requests/pull/5797
+    # - chardet >=3.0.2,<5
+    - charset-normalizer >=2.0.0,<2.1.0
     - urllib3 >=1.21.1,<1.27
 
 test:
