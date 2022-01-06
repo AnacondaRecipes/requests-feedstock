@@ -17,20 +17,23 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python >=3.6
     - certifi >=2017.4.17
-    # no longer required, but optional: https://github.com/psf/requests/pull/5797
-    # - chardet >=3.0.2,<5
     - charset-normalizer >=2.0.0,<2.1.0
     - idna >=2.5,<4
     - urllib3 >=1.21.1,<1.27
+    # no longer required for python 3.6+, but optional: https://github.com/psf/requests/pull/5797
+    # - chardet >=3.0.2,<5
 
 test:
   requires:
     - pip
+    - python <3.10
   commands:
     - pip check
   imports:
@@ -39,6 +42,7 @@ test:
 about:
   home: http://python-requests.org
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE
   summary: Requests is an elegant and simple HTTP library for Python, built with ♥.
   description: |
