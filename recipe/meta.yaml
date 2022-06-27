@@ -13,8 +13,9 @@ source:
 
 build:
   number: {{ build_number }}
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [py<3.7]
+
 
 requirements:
   host:
@@ -23,7 +24,7 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python >=3.6
+    - python
     - certifi >=2017.4.17
     - charset-normalizer >=2.0.0,<2.1.0
     - idna >=2.5,<4
@@ -34,7 +35,7 @@ requirements:
 test:
   requires:
     - pip
-    - python >=3.6
+    - python
     - conda
   commands:
     - pip check
