@@ -1,6 +1,7 @@
 {% set name = "requests" %}
-{% set version = "2.27.1" %}
-
+{% set version = "2.28.0" %}
+{% set hash = "d568723a7ebd25875d8d1eaf5dfa068cd2fc8194b2e483d7b1f7c81918dbec6b" %}
+{% set build_number = "0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,12 +9,13 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/requests-{{ version }}.tar.gz
-  sha256: 68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61
+  sha256: {{ hash }}
 
 build:
-  number: 0
-  noarch: python
+  number: {{ build_number }}
   script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [py<37]
+
 
 requirements:
   host:
@@ -22,25 +24,28 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python >=3.6
+    - python
     - certifi >=2017.4.17
     - charset-normalizer >=2.0.0,<2.1.0
     - idna >=2.5,<4
     - urllib3 >=1.21.1,<1.27
-    # no longer required for python 3.6+, but optional: https://github.com/psf/requests/pull/5797
+    # replaced by charset normalizer and is optional as of python 3.6+: https://github.com/psf/requests/pull/5797
     # - chardet >=3.0.2,<5
 
 test:
   requires:
     - pip
-    - python <3.10
+    - python
+    - conda
   commands:
     - pip check
+    # to make sure this doesn't break conda at the very least
+    - conda create -v --dry-run -n requests-test numpy
   imports:
     - requests
 
 about:
-  home: http://python-requests.org
+  home: https://requests.readthedocs.io/en/latest/
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -48,7 +53,7 @@ about:
   description: |
     Requests is the only Non-GMO HTTP library for Python, safe for human
     consumption.
-  doc_url: http://docs.python-requests.org/
+  doc_url: https://requests.readthedocs.io/en/latest/
   dev_url: https://github.com/psf/requests
 
 extra:
