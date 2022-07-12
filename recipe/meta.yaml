@@ -1,6 +1,6 @@
 {% set name = "requests" %}
 {% set version = "2.28.1" %}
-{% set hash = "300e5495d0306f472c1aa34a522273e3066b9f50d3eb25cee17cd3b6177eea54" %}
+{% set hash = "7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983" %}
 {% set build_number = "0" %}
 
 package:
