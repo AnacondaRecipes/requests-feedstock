@@ -26,7 +26,7 @@ requirements:
   run:
     - python
     - certifi >=2017.4.17
-    - charset-normalizer >=2.0.0,<2.1.0
+    - charset-normalizer >=2.0.0,<3
     - idna >=2.5,<4
     - urllib3 >=1.21.1,<1.27
     # replaced by charset normalizer and is optional as of python 3.6+: https://github.com/psf/requests/pull/5797
@@ -35,7 +35,6 @@ requirements:
 test:
   requires:
     - pip
-    - python
     - conda
   commands:
     - pip check
