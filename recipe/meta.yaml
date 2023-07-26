@@ -1,6 +1,6 @@
 {% set name = "requests" %}
-{% set version = "2.29.0" %}
-{% set hash = "f2e34a75f4749019bb0e3effb66683630e4ffeaf75819fb51bebef1bf5aef059" %}
+{% set version = "2.31.0" %}
+{% set hash = "942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1" %}
 {% set build_number = "0" %}
 
 package:
@@ -28,10 +28,11 @@ requirements:
     - certifi >=2017.4.17
     - charset-normalizer >=2,<4
     - idna >=2.5,<4
-    - urllib3 >=1.21.1,<1.27
+    - urllib3 >=1.21.1,<2
   # https://github.com/psf/requests/blob/da9996fe4dc63356e9467d0a5e10df3d89a8528e/requests/__init__.py#L103-L115
   run_constrained:
     - chardet >=3.0.2,<6
+    - pysocks >=1.5.6, !=1.5.7
 
 test:
   requires:
@@ -45,7 +46,7 @@ test:
     - requests
 
 about:
-  home: https://requests.readthedocs.io/en/latest/
+  home: https://requests.readthedocs.io/
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -53,7 +54,7 @@ about:
   description: |
     Requests is the only Non-GMO HTTP library for Python, safe for human
     consumption.
-  doc_url: https://requests.readthedocs.io/en/latest/
+  doc_url: https://requests.readthedocs.io/
   dev_url: https://github.com/psf/requests
 
 extra:
