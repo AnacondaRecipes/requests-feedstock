@@ -28,7 +28,7 @@ requirements:
     - certifi >=2017.4.17
     - charset-normalizer >=2,<4
     - idna >=2.5,<4
-    - urllib3 >=1.21.1,<3
+    - urllib3 >=1.21.1,<2
   # https://github.com/psf/requests/blob/da9996fe4dc63356e9467d0a5e10df3d89a8528e/requests/__init__.py#L103-L115
   run_constrained:
     - chardet >=3.0.2,<6
