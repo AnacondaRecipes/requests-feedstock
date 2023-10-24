@@ -37,11 +37,11 @@ requirements:
 test:
   requires:
     - pip
-    - conda
+    - conda                                            # [py<312] temporary for the 3.12 buildout
   commands:
     - pip check
     # to make sure this doesn't break conda at the very least
-    - conda create -v --dry-run -n requests-test numpy
+    - conda create -v --dry-run -n requests-test numpy # [py<312] temporary for the 3.12 buildout
   imports:
     - requests
 
