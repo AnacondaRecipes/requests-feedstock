@@ -35,11 +35,11 @@ test:
     - requests
   requires:
     - pip
-    - conda                                            # [py<312] temporary for the 3.12 buildout
+    - conda
   commands:
     - pip check
     # to make sure this doesn't break conda at the very least
-    - conda create -v --dry-run -n requests-test numpy # [py<312] temporary for the 3.12 buildout
+    - conda create -v --dry-run -n requests-test numpy
 
 about:
   home: https://requests.readthedocs.io/
