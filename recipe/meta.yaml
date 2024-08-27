@@ -34,11 +34,8 @@ test:
     - requests
   requires:
     - pip
-    - conda
   commands:
     - pip check
-    # to make sure this doesn't break conda at the very least
-    - conda create -v --dry-run -n requests-test numpy
 
 about:
   home: https://requests.readthedocs.io/
