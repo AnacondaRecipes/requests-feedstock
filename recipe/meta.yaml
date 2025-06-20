@@ -58,7 +58,7 @@ test:
         or test_urllib3_retries or test_urllib3_pool_connection_closed)"
 
 about:
-  home: https://requests.readthedocs.io/
+  home: https://requests.readthedocs.io
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
