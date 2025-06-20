@@ -1,16 +1,18 @@
 {% set name = "requests" %}
-{% set version = "2.32.3" %}
+{% set version = "2.32.4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/requests-{{ version }}.tar.gz
-  sha256: 55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 27d0316682c8a29834d3264820024b62a36942083d52caf2f14c0591336d3422
+
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<38]
 
 requirements:
   host:
@@ -32,16 +34,31 @@ requirements:
 test:
   imports:
     - requests
+  source_files:
+    - tests
+    - pyproject.toml
   requires:
     - pip
-    - conda  # [not py==313]
+    - conda
+    - pytest >=6.2
+    - pytest-mock
+    - pytest-xdist
+    - pysocks >=1.5.6,!=1.5.7
   commands:
     - pip check
     # to make sure this doesn't break conda at the very least
-    - conda create -v --dry-run -n requests-test numpy # [not py==313]
+    - conda create -v --dry-run -n requests-test numpy
+    # Disable httpbin plugin because pytest-httpbin isn't available
+    - |
+      pytest -v  \
+        -k "not (test_use_proxy_from_environment or TestRequests or TestTimeout \
+        or test_requests_are_updated_each_time or tests/test_requests.py::test_urllib3_retries \
+        or tests/test_requests.py::test_urllib3_pool_connection_closed or TestPreparingURLs \
+        or test_content_length_for_bytes_data or test_content_length_for_string_data_counts_bytes \
+        or test_urllib3_retries or test_urllib3_pool_connection_closed)"
 
 about:
-  home: https://requests.readthedocs.io/
+  home: https://requests.readthedocs.io
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
