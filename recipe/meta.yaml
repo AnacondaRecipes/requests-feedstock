@@ -1,16 +1,18 @@
 {% set name = "requests" %}
-{% set version = "2.32.3" %}
+{% set version = "2.32.4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/requests-{{ version }}.tar.gz
-  sha256: 55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/requests-{{ version }}.tar.gz
+  sha256: 27d0316682c8a29834d3264820024b62a36942083d52caf2f14c0591336d3422
+
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<38]
 
 requirements:
   host:
@@ -27,7 +29,7 @@ requirements:
   # https://github.com/psf/requests/blob/v2.32.2/src/requests/__init__.py#L58
   run_constrained:
     - chardet >=3.0.2,<6
-    - pysocks >=1.5.6,!=1.5.7
+    - PySocks >=1.5.6,!=1.5.7
 
 test:
   imports:
@@ -38,7 +40,7 @@ test:
   commands:
     - pip check
     # to make sure this doesn't break conda at the very least
-    - conda create -v --dry-run -n requests-test numpy # [not py==313]
+    - conda create -v --dry-run -n requests-test numpy  # [not py==313]
 
 about:
   home: https://requests.readthedocs.io/
