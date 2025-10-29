@@ -10,7 +10,7 @@ source:
   sha256: dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<39]
 
@@ -37,7 +37,7 @@ test:
     - pyproject.toml
   requires:
     - pip
-    - conda
+    - conda  # [py<314]
     - pytest >=6.2
     - pytest-mock
     - pytest-xdist
@@ -47,13 +47,13 @@ test:
     # to make sure this doesn't break conda at the very least
     - conda create -v --dry-run -n requests-test numpy
     # Disable httpbin plugin because pytest-httpbin isn't available
-    - |
-      pytest -v  \
-        -k "not (test_use_proxy_from_environment or TestRequests or TestTimeout \
-        or test_requests_are_updated_each_time or tests/test_requests.py::test_urllib3_retries \
-        or tests/test_requests.py::test_urllib3_pool_connection_closed or TestPreparingURLs \
-        or test_content_length_for_bytes_data or test_content_length_for_string_data_counts_bytes \
-        or test_urllib3_retries or test_urllib3_pool_connection_closed)"
+    - :
+        pytest -v  \:
+          - '-k "not (test_use_proxy_from_environment or TestRequests or TestTimeout \'
+          - or test_requests_are_updated_each_time or tests/test_requests.py::test_urllib3_retries \
+          - or tests/test_requests.py::test_urllib3_pool_connection_closed or TestPreparingURLs \
+          - or test_content_length_for_bytes_data or test_content_length_for_string_data_counts_bytes \
+          - or test_urllib3_retries or test_urllib3_pool_connection_closed)"
 
 about:
   home: https://requests.readthedocs.io
