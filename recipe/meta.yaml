@@ -37,13 +37,15 @@ test:
     - pyproject.toml
   requires:
     - pip
-    - conda  # [py<314]
+    - conda  # [not py==314]
     - pytest >=6.2
     - pytest-mock
     - pytest-xdist
     - pysocks >=1.5.6,!=1.5.7
   commands:
     - pip check
+    # Test that we can run conda
+    - python -m conda  # [not py==314]
     # to make sure this doesn't break conda at the very least
     - conda create -v --dry-run -n requests-test numpy
     # Disable httpbin plugin because pytest-httpbin isn't available
