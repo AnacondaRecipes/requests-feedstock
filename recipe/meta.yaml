@@ -1,5 +1,5 @@
 {% set name = "requests" %}
-{% set version = "2.32.5" %}
+{% set version = "2.33.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf
+  sha256: 18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<39]
 
@@ -52,11 +52,12 @@ test:
     # Disable test_zipped_paths_extracted because it's unstable on linux platforms and can fail with  PermissionError.
     - |
       pytest -v  \
-        -k "not (test_use_proxy_from_environment or TestRequests or TestTimeout \
-        or test_requests_are_updated_each_time or tests/test_requests.py::test_urllib3_retries \
-        or tests/test_requests.py::test_urllib3_pool_connection_closed or TestPreparingURLs \
-        or test_content_length_for_bytes_data or test_content_length_for_string_data_counts_bytes \
-        or test_urllib3_retries or test_urllib3_pool_connection_closed or test_zipped_paths_extracted)"
+      -k "not (test_use_proxy_from_environment or TestRequests or TestTimeout \
+      or test_requests_are_updated_each_time or tests/test_requests.py::test_urllib3_retries \
+      or tests/test_requests.py::test_urllib3_pool_connection_closed or TestPreparingURLs \
+      or test_content_length_for_bytes_data or test_content_length_for_string_data_counts_bytes \
+      or test_urllib3_retries or test_urllib3_pool_connection_closed or test_zipped_paths_extracted)"
+
 
 about:
   home: https://requests.readthedocs.io
