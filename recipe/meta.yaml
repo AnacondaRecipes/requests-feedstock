@@ -10,7 +10,7 @@ source:
   sha256: f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<310]
 
@@ -37,7 +37,7 @@ test:
     - pyproject.toml
   requires:
     - pip
-    - conda  # [not py==314]
+    - conda  # [not py==315]
     - pytest >=6.2
     - pytest-mock
     - pytest-xdist
@@ -45,7 +45,7 @@ test:
   commands:
     - pip check
     # Test that we can run conda
-    - python -m conda  # [not py==314]
+    - python -m conda  # [not py==315]
     # to make sure this doesn't break conda at the very least
     - conda create -v --dry-run -n requests-test numpy
     # Disable httpbin plugin because pytest-httpbin isn't available
