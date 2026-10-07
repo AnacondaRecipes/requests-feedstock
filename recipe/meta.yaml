@@ -37,7 +37,7 @@ test:
     - pyproject.toml
   requires:
     - pip
-    - conda  # [not py==315]
+    - conda  # [not py>=315]
     - pytest >=6.2
     - pytest-mock
     - pytest-xdist
